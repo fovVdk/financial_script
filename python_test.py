@@ -229,7 +229,6 @@ if __name__ == "__main__":
             time.sleep(1)
             print("½øÈëÑ­»·£¡\r\n")
             U_state_flag = False
-            break
 
         
 
