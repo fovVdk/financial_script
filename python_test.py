@@ -279,7 +279,7 @@ if __name__ == "__main__":
                     print("网页打开过于迟缓，或者网页出现问题！\r\n")
                     continue
             
-            if start.isElementPresent("id","cygn"):
+            if start.isElementPresent("id","cygn"):
                 start.declare()
             else:
                 sys = sys_kill()
