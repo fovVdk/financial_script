@@ -291,6 +291,8 @@ if __name__ == "__main__":
             start.read_one()
             start.declare_end()
             print("申报已完成!\r\n")
+            sys = sys_kill()
+
 
 
 
