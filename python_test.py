@@ -208,6 +208,27 @@ class guoshui_infos:
         else:
             return True
 
+#U盾插入确定
+class OrUstate:
+
+    def __init__(self):
+        self.U_state = None
+        self.U_state_flag = None
+
+    def get_input(self,input_str):
+        self.U_state = input_str
+        if str(self.U_state) == "yes":
+            U_state_flag = True
+        else:
+            U_state_flag = False
+
+        return U_state_flag
+
+
+
+
+
+
 
 if __name__ == "__main__":
     
@@ -216,8 +237,19 @@ if __name__ == "__main__":
     print("##################################\n")
 
     print("waiting........\n")
+    while 1:
 
-    U_state = input("请确认U盾是否插入:")
+        U_start = OrUstate()
+        U_start_flag = U_start.get_input(input("请确认U盾是否插入:"))
+        if U_state_flag:
+            time.sleep(1)
+            print("进入循环！\r\n")
+            U_state_flag = 0
+            break
+
+        
+
+
 '''
     R_config = ReadConfig()
     print("Read config complated......\n")
