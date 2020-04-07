@@ -98,22 +98,30 @@ class guoshui_infos:
         while count <5:
             self.browser.switch_to_default_content()
             self.browser.implicitly_wait(5)
-            if self.isElementPresent("class","layui-layer-btn0"):
-        
-                self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
+            if self.isElementPresent("class","login-box") == False:
+                if self.isElementPresent("class","layui-layer-btn0"):
+            
+                    self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
 
-                self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
+                    self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
 
-                self.browser.find_element_by_xpath('//*[@class="dlbox"]').click()
+                    self.browser.find_element_by_xpath('//*[@class="dlbox"]').click()
 
+                else:
+                    self.browser.find_element_by_xpath('//*[@class="loginico"]').click()
+
+                if check_login():
+                    count = 0
+                    break
+                else:
+                    count += 1
             else:
-                self.browser.find_element_by_xpath('//*[@class="loginico"]').click()
-
-            if check_login():
+                kehu_password = R_config.use_passwd("1")
+                self.passwdwrite(kehu_password)
                 count = 0
                 break
-            else:
-                count += 1
+
+
 
 
 
@@ -268,7 +276,7 @@ if __name__ == "__main__":
                 break
 
             start.login()
-
+            time.sleep(2)
             if start.check_login():
                 kehu_password = R_config.use_passwd("1")
                 start.passwdwrite(kehu_password)
