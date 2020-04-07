@@ -229,7 +229,7 @@ class guoshui_infos:
         else:
             return True
 
-class sys_kill(self):
+class sys_kill:
 
     def __init__(self):
         os.system("taskkill /F /im iexplore.exe")
