@@ -24,7 +24,7 @@ class ReadConfig:
      
     
 
-    def get_cf(self):
+    def get_path(self):
         value = self.cf.get("PATH","url")
         return value
 
@@ -71,24 +71,51 @@ class guoshui_infos:
  
         self.browser.get(self.url)
     
-
+        self.browser.implicitly_wait(5)
         if self.isElementPresent("class","layui-layer-btn0"):
-           self.browser.implicitly_wait(10)
+     
            self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
 
-
-           self.browser.implicitly_wait(10)
            self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
 
-
-           self.browser.implicitly_wait(10)
            self.browser.find_element_by_xpath('//*[@class="dlbox"]').click()
 
-           print("Have window!\r\n")
         else:
-           self.browser.implicitly_wait(10)
            self.browser.find_element_by_xpath('//*[@class="loginico"]').click()
-           print("No window!\r\n")
+ 
+
+    def check_login(self):
+
+        self.browser.switch_to_default_content()
+        if self.isElementPresent("class","login-box"):
+            return True
+        else:
+            return False
+
+    def again_login(self):
+
+        count = 0
+        while count <5:
+            self.browser.switch_to_default_content()
+            self.browser.implicitly_wait(5)
+            if self.isElementPresent("class","layui-layer-btn0"):
+        
+            self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
+
+            self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
+
+            self.browser.find_element_by_xpath('//*[@class="dlbox"]').click()
+
+            else:
+            self.browser.find_element_by_xpath('//*[@class="loginico"]').click()
+
+            if check_login():
+                count = 0
+                break
+            else:
+                count += 1
+
+
 
 
 
@@ -107,14 +134,12 @@ class guoshui_infos:
         
 
 
-    def passwdwrite(self):      
+    def passwdwrite(self,kuhu_password):      
 
 
         self.browser.implicitly_wait(10)
         self.browser.find_element_by_name('CapassWord').send_keys(kehu_password)
-
-        self.browser.implicitly_wait(10)
-        time.sleep(3)
+        time.sleep(1)
         self.browser.execute_script("dzswjLogin()")
 
 
@@ -125,26 +150,22 @@ class guoshui_infos:
         print(Timely_declaration.get_attribute('onclick'))
         self.browser.execute_script(Timely_declaration.get_attribute('onclick'))
 
-        
-        time.sleep(2)
         self.browser.switch_to.frame("ifrMain")
         self.browser.switch_to.frame("lhsbIframe")
         read_complete = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'div.white_content')))
         self.browser.execute_script("closeDialog()")
 
-     
-        time.sleep(2)
-        write_VAT_declare = WebDriverWait(self.browser,20).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'.searchbox table tr:nth-child(2) td:nth-child(8)>a'))) #> table > tbody > tr:nth-child(2) > td:nth-child(8) > a')))
+
+        write_VAT_declare = WebDriverWait(self.browser,10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'.searchbox table tr:nth-child(2) td:nth-child(8)>a'))) #> table > tbody > tr:nth-child(2) > td:nth-child(8) > a')))
         print(write_VAT_declare.get_attribute('href'))
         self.browser.execute_script(write_VAT_declare.get_attribute('href'))
 
-        time.sleep(2)
         self.browser.switch_to_default_content()
         self.browser.switch_to.frame("ifrMain")
         if self.isElementPresent("id","layui-layer1"):
-            write_text1_declare = WebDriverWait(self.browser,20).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'#layui-layer1 .win-center>.layui-table>tbody>tr:nth-child(2)>td:nth-child(2)>button')))# win-center tbody tr:nth-child(2) td:nth-child(2)')))
+            write_text1_declare = WebDriverWait(self.browser,10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'#layui-layer1 .win-center>.layui-table>tbody>tr:nth-child(2)>td:nth-child(2)>button')))# win-center tbody tr:nth-child(2) td:nth-child(2)')))
         else:
-            write_text1_declare = WebDriverWait(self.browser,20).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'#layui-layer2 .win-center>.layui-table>tbody>tr:nth-child(2)>td:nth-child(2)>button')))
+            write_text1_declare = WebDriverWait(self.browser,10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'#layui-layer2 .win-center>.layui-table>tbody>tr:nth-child(2)>td:nth-child(2)>button')))
         print(write_text1_declare.get_attribute('onclick'))
         self.browser.execute_script(write_text1_declare.get_attribute('onclick'))
 
@@ -153,30 +174,30 @@ class guoshui_infos:
 
         windows = self.browser.window_handles
         self.browser.switch_to.window(windows[-1])
-        write_text2_declare = WebDriverWait(self.browser,20).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'#layui-layer1')))
+        write_text2_declare = WebDriverWait(self.browser,10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'#layui-layer1')))
         print(write_text2_declare.text)
         self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
         
     def read_one(self):
         self.browser.switch_to_default_content()
-        write_text3_declare = WebDriverWait(self.browser,20).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'table>tbody>tr>td:nth-child(2)>li:nth-child(2)>a')))
+        write_text3_declare = WebDriverWait(self.browser,10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,'table>tbody>tr>td:nth-child(2)>li:nth-child(2)>a')))
         print(write_text3_declare.text)
         self.browser.execute_script(write_text3_declare.get_attribute('onclick'))
         self.browser.switch_to_default_content()
         self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
-        time.sleep(2)
+  
         self.browser.execute_script("javascript:window.frames[0].refresh();")
-        time.sleep(2)
+  
         self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
-        time.sleep(2)
+ 
         self.browser.execute_script("javascript:window.frames[0].prepareForm();")
-        time.sleep(1)
+
         self.browser.switch_to_default_content()
         self.browser.find_element_by_xpath('//*[@id="btnSave"]').click()
         self.browser.execute_script("javascript:window.frames[0].prepareForm();")
-        time.sleep(5)
+   
         self.browser.switch_to_default_content()
-        time.sleep(3)
+      
         self.browser.switch_to.frame("frmMain")
         self.browser.find_element_by_xpath('//*[@id="Message_btn_0"]').click()
 
@@ -208,6 +229,14 @@ class guoshui_infos:
         else:
             return True
 
+class sys_kill(self):
+
+    def __init__(self):
+        os.system("taskkill /F /im iexplore.exe")
+        time.sleep(1)
+        os.system("taskkill /F /im IEDriverServer.exe")
+ 
+
 
 
 if __name__ == "__main__":
@@ -229,6 +258,58 @@ if __name__ == "__main__":
             time.sleep(1)
             print("进入循环！\r\n")
             U_state_flag = False
+
+            R_config = ReadConfig()
+            Iedriver_path = R_config.get_path()
+            if len(Iedriver_path) > 0:
+                start = guoshui_infos(Iedriver_path)
+            else:
+                print("NoReadConfig:::配置文件路径出错:\r\n",str(Iedriver_path))
+                break
+
+            start.login()
+
+            if start.check_login():
+                kehu_password = R_config.use_passwd("1")
+                start.passwdwrite(kehu_password)
+            else
+                start.again_login()
+                if start.check_login() == False:
+                    sys = sys_kill()
+                    print("网页打开过于迟缓，或者网页出现问题！\r\n")
+                    continue
+            
+            if start.isElementPresent("id","cygn"):
+                start.declare()
+            else:
+                sys = sys_kill()
+                print("网页打开过于迟缓，或者网页出现问题！\r\n")
+                continue
+
+            start.jump_web()
+            time.sleep(1)
+            start.read_one()
+            start.declare_end()
+            print("申报已完成!\r\n")
+
+
+
+            
+                
+            
+
+
+            
+
+                    
+
+
+            
+
+            
+
+            
+
 
         
 
