@@ -100,14 +100,14 @@ class guoshui_infos:
             self.browser.implicitly_wait(5)
             if self.isElementPresent("class","layui-layer-btn0"):
         
-            self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
+                self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
 
-            self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
+                self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
 
-            self.browser.find_element_by_xpath('//*[@class="dlbox"]').click()
+                self.browser.find_element_by_xpath('//*[@class="dlbox"]').click()
 
             else:
-            self.browser.find_element_by_xpath('//*[@class="loginico"]').click()
+                self.browser.find_element_by_xpath('//*[@class="loginico"]').click()
 
             if check_login():
                 count = 0
