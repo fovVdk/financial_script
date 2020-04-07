@@ -87,7 +87,7 @@ class guoshui_infos:
     def check_login(self):
 
         self.browser.switch_to_default_content()
-        if self.isElementPresent("class","login-box"):
+        if self.isElementPresent("class","bjDzswjShowDiv"):
             return True
         else:
             return False
@@ -98,7 +98,7 @@ class guoshui_infos:
         while count <5:
             self.browser.switch_to_default_content()
             self.browser.implicitly_wait(5)
-            if self.isElementPresent("class","login-box") == False:
+            if self.isElementPresent("class","bjDzswjShowDiv") == False:
                 if self.isElementPresent("class","layui-layer-btn0"):
             
                     self.browser.find_element_by_xpath('//*[@class="layui-layer-btn0"]').click()
@@ -131,7 +131,7 @@ class guoshui_infos:
     def user_input(self):
 
         self.browser.implicitly_wait(10)
-        User_address = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'div#bjDzswjShowDiv > div.logindiv > div.login-box')))
+        User_address = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'div#bjDzswjShowDiv > div.logindiv > div.bjDzswjShowDiv')))
         print(User_address.text)
         print("user input")
 
