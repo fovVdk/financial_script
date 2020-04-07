@@ -272,7 +272,7 @@ if __name__ == "__main__":
             if start.check_login():
                 kehu_password = R_config.use_passwd("1")
                 start.passwdwrite(kehu_password)
-            else
+            else:
                 start.again_login()
                 if start.check_login() == False:
                     sys = sys_kill()
