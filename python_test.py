@@ -277,6 +277,7 @@ if __name__ == "__main__":
 
             start.login()
             time.sleep(2)
+            '''
             if start.check_login():
                 kehu_password = R_config.use_passwd("1")
                 start.passwdwrite(kehu_password)
@@ -286,7 +287,9 @@ if __name__ == "__main__":
                     sys = sys_kill()
                     print("网页打开过于迟缓，或者网页出现问题！\r\n")
                     continue
-            
+            '''
+            kehu_password = R_config.use_passwd("1")
+            start.passwdwrite(kehu_password)
             if start.isElementPresent("id","cygn"):
                 start.declare()
             else:
